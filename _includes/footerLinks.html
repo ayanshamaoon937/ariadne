@@ -1,0 +1,511 @@
+<script src="{{ "/assets-new/js/bootstrap.bundle.min.js" | relative_url }}"></script>
+<script>
+    $(document).ready(function () {
+
+        // Application Slider
+        $('.application-slider').slick({
+            dots: false,
+            infinite: true,
+            speed: 700,
+            slidesToShow: 2,
+            slidesToScroll: 1,
+            arrows: true,
+            prevArrow: $('.btn-prev-app'),
+            nextArrow: $('.btn-next-app'),
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToScroll: 1,
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                    }
+                }
+            ]
+        });
+    });
+</script>
+<script>
+    // Hero Slider
+    $(document).ready(function () {
+        let slider = $('.single-item');
+
+        // Initialize Slick slider
+        slider.slick({
+            dots: true,
+            infinite: true,
+            speed: 700,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: true,
+            prevArrow: $('.hero-btn-prev'),
+            nextArrow: $('.hero-btn-next'),
+            responsive: [
+                {
+                    breakpoint: 992,
+                    settings: {
+                        dots: true,
+                        arrows: false
+                    }
+                }
+            ]
+        });
+
+        // Handle responsive button visibility
+        function updateArrowVisibility() {
+            if (window.innerWidth < 992) {
+                $('.hero-btn-prev, .hero-btn-next').hide();
+            } else {
+                $('.hero-btn-prev, .hero-btn-next').show();
+            }
+        }
+
+        // Initial check
+        updateArrowVisibility();
+
+        // Update on window resize
+        $(window).on('resize', updateArrowVisibility);
+
+        // Map nav-pills buttons to slides
+        $('.nav-pills .nav-link').each(function (index) {
+            $(this).on('click', function () {
+                $('.nav-pills .nav-link').removeClass('active'); // Remove active class
+                $(this).addClass('active'); // Add active class to clicked button
+                slider.slick('slickGoTo', index); // Go to corresponding slide
+            });
+        });
+
+        // Sync active class on slide change
+        slider.on('afterChange', function (event, slick, currentSlide) {
+            $('.nav-pills .nav-link').removeClass('active'); // Remove active class
+            $('.nav-pills .nav-link').eq(currentSlide).addClass('active'); // Add active class to correct button
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        // Testimonial Slider
+        $('.testimonial-slider').slick({
+            dots: false,
+            infinite: true,
+            speed: 700,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: true,
+            prevArrow: $('.btn-prev-testimonial'),
+            nextArrow: $('.btn-next-testimonial'),
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: false
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        // Latest News Slider
+        $('.latest-news-slider').slick({
+            dots: false,
+            infinite: true,
+            speed: 700,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            arrows: true,
+            prevArrow: $('.btn-prev-news'),
+            nextArrow: $('.btn-next-news'),
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: false
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+    });
+</script>
+<script>
+    document.querySelectorAll(".nav-item").forEach((item) => {
+        let dropdown = item.querySelector(".drop-down");
+        let icon = item.querySelector(".nav-link img");
+
+        if (dropdown) { // Ensure dropdown exists before adding event listeners
+            item?.addEventListener("mouseenter", () => {
+                dropdown.style.display = "block";
+                if (icon) { // Ensure icon exists before modifying it
+                    icon.style.transform = "rotate(180deg)";
+                    icon.style.transition = "transform 0.3s ease-in-out";
+                }
+            });
+
+            item?.addEventListener("mouseleave", () => {
+                setTimeout(() => {
+                    if (!item.matches(":hover") && !dropdown.matches(":hover")) {
+                        dropdown.style.display = "none";
+                        if (icon) {
+                            icon.style.transform = "rotate(0deg)";
+                        }
+                    }
+                }, 200);
+            });
+
+            dropdown?.addEventListener("mouseleave", () => {
+                setTimeout(() => {
+                    if (!item.matches(":hover") && !dropdown.matches(":hover")) {
+                        dropdown.style.display = "none";
+                        if (icon) {
+                            icon.style.transform = "rotate(0deg)";
+                        }
+                    }
+                }, 200);
+            });
+        }
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const resourceToggle = document.querySelector('[data-bs-toggle="collapse"][href="#resourcesCollapse"]');
+        const resourceCollapse = document.querySelector("#resourcesCollapse");
+
+        if (resourceToggle && resourceCollapse) {
+            const arrowIcon = resourceToggle.querySelector(".arrow-icon");
+
+            resourceCollapse.addEventListener("show.bs.collapse", function () {
+                arrowIcon.style.transform = "rotate(90deg)";
+            });
+
+            resourceCollapse.addEventListener("hide.bs.collapse", function () {
+                arrowIcon.style.transform = "rotate(0deg)";
+            });
+        }
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const cookiePopup = document.querySelector(".cookie-popup");
+        const acceptBtn = document.querySelector(".btn-primary.cookie");
+        const declineBtn = document.querySelector(".btn-white-outline.cookie");
+
+        // Check if the user has already made a choice
+        if (localStorage.getItem("cookieConsent")) {
+            cookiePopup.style.display = "none"; // Hide the popup
+        }
+
+        function setCookieConsent(value) {
+            localStorage.setItem("cookieConsent", value);
+            cookiePopup.style.display = "none"; // Hide after selection
+        }
+
+        acceptBtn.addEventListener("click", function () {
+            setCookieConsent("accepted");
+        });
+
+        declineBtn.addEventListener("click", function () {
+            setCookieConsent("declined");
+        });
+    });
+</script>
+
+
+<!-- Chart code -->
+<script>
+    am5.ready(function () {
+
+        var root = am5.Root.new("chartdiv");
+        root.setThemes([am5themes_Animated.new(root)]);
+
+        var chart = root.container.children.push(
+            am5map.MapChart.new(root, {
+                panX: "none",
+                panY: "none",
+                projection: am5map.geoMercator(),
+                maxZoomLevel: 3,
+                minZoomLevel: 3,
+                wheelY: "none",
+                wheelX: "none",
+                rotationX: -10,
+                centerY: -30,
+                centerX: 0,
+                draggable: false
+            })
+        );
+        var backgroundSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {}));
+        backgroundSeries.mapPolygons.template.setAll({
+            fill: root.interfaceColors.get("alternativeBackground"),
+            fillOpacity: 0,
+            strokeOpacity: 0
+        });
+        backgroundSeries.data.push({
+            geometry: am5map.getGeoRectangle(90, 180, -90, -180)
+        });
+        var polygonSeries = chart.series.push(
+            am5map.MapPolygonSeries.new(root, {
+                geoJSON: am5geodata_worldLow,
+                fill: am5.color(0x616161),
+                stroke: am5.color(0xffffff),
+                strokeWidth: 0.5,
+                interactive: true,
+                exclude: ["AQ"]
+            })
+        );
+        var polygonTemplate = polygonSeries.mapPolygons.template;
+        polygonTemplate.setAll({
+            interactive: true,
+            cursorOverStyle: "pointer",
+            tooltipHTML: "<div style='padding:8px;font-size:14px;'>{name}</div>",
+            tooltip: am5.Tooltip.new(root, {
+                getFillFromSprite: true,
+                autoTextColor: true
+            })
+        });
+        var polygonHoverState = polygonTemplate.states.create("hover", {
+            fill: am5.color(0x9D9D9D)
+        });
+
+        // Set default zoom level and position
+        chart.set("zoomLevel", 1.5);
+        chart.set("centerMapOnZoomOut", false);
+        var lineSeries = chart.series.push(am5map.MapLineSeries.new(root, {}));
+        lineSeries.mapLines.template.setAll({
+            stroke: root.interfaceColors.get("alternativeBackground"),
+            strokeOpacity: 0.3
+        });
+        var pointSeries = chart.series.push(am5map.MapPointSeries.new(root, {
+            calculateAggregates: true,
+            interactive: true
+        }));
+
+        pointSeries.bullets.push(function (root, series, dataItem) {
+            var container = am5.Container.new(root, {});
+
+            var circle = container.children.push(
+                am5.Circle.new(root, {
+                    radius: 10,
+                    fill: am5.color(0x000000),
+                    stroke: am5.color(0xffffff),
+                    strokeWidth: 2,
+                    strokeOpacity: 1,
+                    interactive: true,
+                    cursorOverStyle: "pointer", 
+                    tooltipText: "{tooltip_title}",
+                    tooltip: am5.Tooltip.new(root, {
+                        labelHTML: `
+                            <div class="bg-primary p-3 rounded-0" style="width: 300px; min-width: 300px; min-height: 160px;">
+                                <div class="text-white ff-inter fw-semibold mb-3 h6">{tooltip_title}</div>
+                                <div class="text-white ff-inter fw-light mb-3 d-flex align-items-center justify-content-start">
+                                    <span class="text-white ff-inter fw-light me-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 28 28" fill="none">
+                                            <path d="M14 2.625C9.65234 2.625 6.125 5.98227 6.125 10.1172C6.125 14.875 11.375 22.4148 13.3027 25.019C13.3828 25.1289 13.4876 25.2184 13.6088 25.28C13.73 25.3417 13.864 25.3739 14 25.3739C14.136 25.3739 14.27 25.3417 14.3912 25.28C14.5124 25.2184 14.6172 25.1289 14.6973 25.019C16.625 22.4159 21.875 14.8788 21.875 10.1172C21.875 5.98227 18.3477 2.625 14 2.625Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M14 13.125C15.4497 13.125 16.625 11.9497 16.625 10.5C16.625 9.05025 15.4497 7.875 14 7.875C12.5503 7.875 11.375 9.05025 11.375 10.5C11.375 11.9497 12.5503 13.125 14 13.125Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </span>
+                                    <span class="text-white ff-inter fw-light">{tooltip_location}</span>
+                                </div>
+                                <div class="text-white ff-inter fw-light d-flex align-items-center justify-content-start">
+                                    <span class="text-white ff-inter fw-light me-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <g clip-path="url(#clip0_5446_42197)">
+                                                <path d="M21.75 24H2.25C1.005 24 0 22.995 0 21.75V3.75C0 2.505 1.005 1.5 2.25 1.5H21.75C22.995 1.5 24 2.505 24 3.75V21.75C24 22.995 22.995 24 21.75 24ZM2.25 3C1.83 3 1.5 3.33 1.5 3.75V21.75C1.5 22.17 1.83 22.5 2.25 22.5H21.75C22.17 22.5 22.5 22.17 22.5 21.75V3.75C22.5 3.33 22.17 3 21.75 3H2.25Z" fill="white"/>
+                                                <path d="M6.75 6C6.33 6 6 5.67 6 5.25V0.75C6 0.33 6.33 0 6.75 0C7.17 0 7.5 0.33 7.5 0.75V5.25C7.5 5.67 7.17 6 6.75 6ZM17.25 6C16.83 6 16.5 5.67 16.5 5.25V0.75C16.5 0.33 16.83 0 17.25 0C17.67 0 18 0.33 18 0.75V5.25C18 5.67 17.67 6 17.25 6ZM23.25 9H0.75C0.33 9 0 8.67 0 8.25C0 7.83 0.33 7.5 0.75 7.5H23.25C23.67 7.5 24 7.83 24 8.25C24 8.67 23.67 9 23.25 9Z" fill="white"/>
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_5446_42197">
+                                                <rect width="24" height="24" fill="white"/>
+                                                </clipPath>
+                                            </defs>
+                                        </svg>
+                                    </span>
+                                    <span class="text-white ff-inter fw-light">{tooltip_date}</span>
+                                </div>
+                            </div>
+                        `,
+                        getFillFromSprite: false,
+                        paddingTop: 0,
+                        paddingBottom: 0,
+                        centerX: am5.p50,
+                        centerY: am5.p50,
+                        animationDuration: 200,
+                        maxWidth: 300
+                    })
+                })
+            );
+
+            circle.states.create("hover", {
+                fill: am5.color(0xE74B45),
+                borderColor: am5.color(0xffffff)
+            });
+
+            circle.events.on("click", function(ev) {
+                var dataContext = dataItem.dataContext;
+                if (dataContext.url) {
+                    window.location.href = dataContext.url;
+                }
+            });
+
+            var tooltip = circle.get("tooltip");
+            tooltip.get("background").setAll({
+                fill: am5.color(0x000000),
+                fillOpacity: 0,
+                stroke: am5.color(0x000000),
+                strokeOpacity: 0,
+                shadowOpacity: 0,
+                cornerRadius: 0
+            });
+
+            return am5.Bullet.new(root, {
+                sprite: container
+            });
+        });
+
+        var cities = [
+            {
+                title: "Brussels",
+                latitude: 20.8371,
+                longitude: 4.3676,
+                url: "https://www.google.com/",
+                urlTarget: "_blank",
+                tooltip_title: "13th Annual Alzheimer's and Parkinson's Summit",
+                tooltip_location: "Boston, MA, USA ",
+                tooltip_date: "March 19 & 20 "
+            },
+            {
+                title: "Moscow",
+                latitude: 55.7558,
+                longitude: 37.6173,
+                url: "https://www.google.com/",
+                urlTarget: "_blank",
+                tooltip_title: "Medical Conference 2024",
+                tooltip_location: "Moscow, Russia",
+                tooltip_date: "April 15 & 16"
+            },
+            {
+                title: "London",
+                latitude: 51.5074,
+                longitude: -0.1278,
+                url: "https://www.google.com/",
+                urlTarget: "_blank",
+                tooltip_title: "Healthcare Innovation Summit",
+                tooltip_location: "London, UK",
+                tooltip_date: "May 10 & 11"
+            },
+            {
+                title: "Paris",
+                latitude: 48.8566,
+                longitude: 2.3522,
+                url: "https://www.google.com/",
+                urlTarget: "_blank",
+                tooltip_title: "Medical Research Symposium",
+                tooltip_location: "Paris, France",
+                tooltip_date: "June 5 & 6"
+            },
+            {
+                title: "Berlin",
+                latitude: 52.5200,
+                longitude: 13.4050,
+                url: "https://www.google.com/",
+                urlTarget: "_blank",
+                tooltip_title: "Neuroscience Conference",
+                tooltip_location: "Berlin, Germany",
+                tooltip_date: "July 20 & 21"
+            },
+            {
+                title: "Toronto",
+                latitude: 43.6532,
+                longitude: -79.3832,
+                url: "https://www.google.com/",
+                urlTarget: "_blank",
+                tooltip_title: "Healthcare Technology Summit",
+                tooltip_location: "Toronto, Canada",
+                tooltip_date: "August 15 & 16"
+            },
+            {
+                title: "Barcelona",
+                latitude: 41.3851,
+                longitude: 2.1734,
+                url: "https://www.google.com/",
+                urlTarget: "_blank",
+                tooltip_title: "Medical Innovation Forum",
+                tooltip_location: "Barcelona, Spain",
+                tooltip_date: "September 8 & 9"
+            }
+        ];
+
+        for (var i = 0; i < cities.length; i++) {
+            var city = cities[i];
+            addCity(city.longitude, city.latitude, city.title, city.url, city.tooltip_title, city.tooltip_location, city.tooltip_date);
+        }
+
+        function addCity(longitude, latitude, title, url, tooltip_title, tooltip_location, tooltip_date) {
+            pointSeries.data.push({
+                url: url,
+                geometry: {type: "Point", coordinates: [longitude, latitude]},
+                title: title,
+                tooltip_title: tooltip_title,
+                tooltip_location: tooltip_location,
+                tooltip_date: tooltip_date
+            });
+        }
+
+        chart.appear(1000, 100);
+
+
+    }); // end am5.ready()
+</script>
+
+<style>
+    @media (max-width: 991.98px) {
+        .hero-btn-prev,
+        .hero-btn-next {
+            display: none !important;
+        }
+    }
+</style>
